@@ -54,11 +54,10 @@ void cls() {
 	system("CLS");
 }
 
-void main() {
+void get_Matrix(Matrix &matrix_A,Matrix &matrix_B) {
 
-	char operation_symbol_main='\0';
+	cout << "Order of Matrix:" << endl << endl;
 
-	Matrix matrix_A;
 	matrix_A.matrix_symbol = 'A';
 	cout << "Matrix A:"<<endl;
 	cout << "Rows = ";
@@ -68,7 +67,7 @@ void main() {
 
 	cout << endl;
 
-	Matrix matrix_B;
+
 	matrix_B.matrix_symbol = 'B';
 	cout << "Matrix B:" << endl;
 	cout << "Rows = ";
@@ -77,18 +76,44 @@ void main() {
 	cin >> matrix_B.cols_matrix;
 
 	cout << endl;
-	
-	
+
+
 	press_to_continue();
 	cls();
+}
+
+void sum() {
+
+	Matrix A;
+	Matrix B;
+
+	get_Matrix(A, B);
+
+	cout << "Order of Matrix:" << endl << endl;
+
+	display_order(A.rows_matrix, A.cols_matrix, A.matrix_symbol);
+	display_order(B.rows_matrix, B.cols_matrix, B.matrix_symbol);
+
+
+}
+void diff() {
+
+}
+void pro() {
+
+}
+
+void main() {
+
+	char operation_symbol_main='\0';
+
+	
 	
 	do {
-		display_order(matrix_A.rows_matrix, matrix_A.cols_matrix, matrix_A.matrix_symbol);
-		display_order(matrix_B.rows_matrix, matrix_B.cols_matrix, matrix_B.matrix_symbol);
+		
 
 
-		cout << endl;
-		cout << endl;
+		
 
 		operation_symbol_main = operation();
 
@@ -98,22 +123,27 @@ void main() {
 			cout  << endl << "ERROR: ***INVALID SELECTION***"<<endl;
 		}
 		
+		cout << endl;
+
 		cout << "You Selected:";
 		switch (operation_symbol_main)
 		{
 		case '+':
 		{
-			 cout<<" Sum of MATRICES " ;
+			 cout<<" SUM of MATRICES " <<endl<<endl;
+			 press_to_continue();
+			 cls();
+			 sum();
 			break;
 		}
 		case '-':
 		{
-			cout << " Difference of MATRICES ";
+			cout << " DIFFERENCE of MATRICES ";
 			break;
 		}
 		case '*':
 		{
-			cout << " Product of MATRICES ";
+			cout << " PRODUCT of MATRICES ";
 			break;
 		}
 		default:
