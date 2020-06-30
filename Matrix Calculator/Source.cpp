@@ -152,7 +152,7 @@ void get_Matrix(char operation) {
 		cout << setw(6);
 	}
 
-	if (operation == '+') {
+	if (operation == '+'&&A.rows_matrix==B.rows_matrix&&A.cols_matrix==B.cols_matrix) {
 		cout << endl << endl;
 		float arr_sum[general_order_of_matrices][general_order_of_matrices] = { 0 };
 
@@ -162,7 +162,7 @@ void get_Matrix(char operation) {
 			}
 		}
 
-		cout << "A+B = ";
+		cout << "A+B = " << endl << endl;
 
 		for (int i = 0; i < A.rows_matrix; i++) {
 			cout << "| " << "\t";
@@ -170,11 +170,11 @@ void get_Matrix(char operation) {
 				cout << arr_sum[i][j] << "\t";
 			}
 			
-			cout << " |" << endl;
-			cout << setw(9);
+			cout << " |" << endl << endl;
+
 		}
 	}
-	else if (operation == '-') {
+	else if (operation == '-' && A.rows_matrix == B.rows_matrix && A.cols_matrix == B.cols_matrix) {
 		cout << endl << endl;
 		float arr_sub[general_order_of_matrices][general_order_of_matrices] = { 0 };
 
@@ -184,7 +184,7 @@ void get_Matrix(char operation) {
 			}
 		}
 
-		cout << "A-B = ";
+		cout << "A-B = " << endl<<endl;
 
 		for (int i = 0; i < A.rows_matrix; i++) {
 			cout << "| " << "\t";
@@ -192,11 +192,11 @@ void get_Matrix(char operation) {
 				cout << arr_sub[i][j] << "\t";
 			}
 			
-			cout << " |" << endl;
-			cout << setw(7);
+			cout << " |" << endl ;
+
 		}
 	}
-	else if (operation == '*') {
+	else if (operation == '*'&&A.cols_matrix==B.rows_matrix) {
 		cout << endl << endl;
 		float arr_pro[general_order_of_matrices][general_order_of_matrices] = { 0 };
 
@@ -207,7 +207,7 @@ void get_Matrix(char operation) {
 		}
 
 
-		cout << "A*B = ";
+		cout << "A*B = "<<endl << endl;
 
 		for (int i = 0; i < A.rows_matrix; i++) {
 			cout << "| " << "\t";
@@ -216,8 +216,11 @@ void get_Matrix(char operation) {
 			}
 
 			cout << " |" << endl;
-			cout << setw(7);
+
 		}
+	}
+	else {
+		cout << endl << "** Error: INVALID ORDER **";
 	}
 
 	
