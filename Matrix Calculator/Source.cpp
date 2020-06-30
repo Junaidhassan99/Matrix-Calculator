@@ -90,6 +90,7 @@ void get_Matrix(char operation) {
 
 	Matrix A;
 	Matrix B;
+	bool invalid = false;
 
 
 	get_order_of_matrix(A, B);
@@ -106,50 +107,62 @@ void get_Matrix(char operation) {
 
 	cout << endl << endl;
 
-	
-	cout << "Elements of Matrix "<<A.matrix_symbol<<": " << endl << endl;
-
-	for (int i = 0; i < A.rows_matrix; i++) {
-		for (int j = 0; j < A.cols_matrix; j++) {
-			cout << A.matrix_symbol<<" [ Row = " << i + 1 << " ][ Col = " << j + 1 << " ] = ";
-			cin >> arr_A[i][j];
+	if (operation == '+' || operation == '-') {
+		if (A.rows_matrix != B.rows_matrix && A.cols_matrix != B.cols_matrix) {
+			invalid = true;
+		}
+	}
+	else if (operation == '*') {
+		if (A.cols_matrix != B.rows_matrix) {
+			invalid = true;
 		}
 	}
 
-	cout << endl;
-	cout << A.matrix_symbol<<" = ";
-	for (int i = 0; i < A.rows_matrix; i++) {
-		cout << "| " << "\t";
-		for (int j = 0; j < A.cols_matrix; j++) {
-			cout << arr_A[i][j] << "\t";
+	if (!invalid) {
+		cout << "Elements of Matrix " << A.matrix_symbol << ": " << endl << endl;
+
+		for (int i = 0; i < A.rows_matrix; i++) {
+			for (int j = 0; j < A.cols_matrix; j++) {
+				cout << A.matrix_symbol << " [ Row = " << i + 1 << " ][ Col = " << j + 1 << " ] = ";
+				cin >> arr_A[i][j];
+			}
 		}
-		
-		cout << " |" << endl;
-		cout << setw(6);
-	}
 
-	cout << endl << endl;
+		cout << endl;
+		cout << A.matrix_symbol << " = ";
+		for (int i = 0; i < A.rows_matrix; i++) {
+			cout << "| " << "\t";
+			for (int j = 0; j < A.cols_matrix; j++) {
+				cout << arr_A[i][j] << "\t";
+			}
 
-
-	cout << "Elements of Matrix " << B.matrix_symbol << ": " << endl << endl;
-
-	for (int i = 0; i < B.rows_matrix; i++) {
-		for (int j = 0; j < B.cols_matrix; j++) {
-			cout << B.matrix_symbol << " [ Row = " << i + 1 << " ][ Col = " << j + 1 << " ] = ";
-			cin >> arr_B[i][j];
+			cout << " |" << endl;
+			cout << setw(6);
 		}
-	}
 
-	cout << endl;
-	cout << B.matrix_symbol << " = ";
-	for (int i = 0; i < B.rows_matrix; i++) {
-		cout << "| " << "\t";
-		for (int j = 0; j < B.cols_matrix; j++) {
-			cout << arr_B[i][j] << "\t";
+		cout << endl << endl;
+
+
+		cout << "Elements of Matrix " << B.matrix_symbol << ": " << endl << endl;
+
+		for (int i = 0; i < B.rows_matrix; i++) {
+			for (int j = 0; j < B.cols_matrix; j++) {
+				cout << B.matrix_symbol << " [ Row = " << i + 1 << " ][ Col = " << j + 1 << " ] = ";
+				cin >> arr_B[i][j];
+			}
 		}
-		
-		cout << " |" << endl;
-		cout << setw(6);
+
+		cout << endl;
+		cout << B.matrix_symbol << " = ";
+		for (int i = 0; i < B.rows_matrix; i++) {
+			cout << "| " << "\t";
+			for (int j = 0; j < B.cols_matrix; j++) {
+				cout << arr_B[i][j] << "\t";
+			}
+
+			cout << " |" << endl;
+			cout << setw(6);
+		}
 	}
 
 	if (operation == '+'&&A.rows_matrix==B.rows_matrix&&A.cols_matrix==B.cols_matrix) {
@@ -170,7 +183,7 @@ void get_Matrix(char operation) {
 				cout << arr_sum[i][j] << "\t";
 			}
 			
-			cout << " |" << endl << endl;
+			cout << " |" << endl ;
 
 		}
 	}
