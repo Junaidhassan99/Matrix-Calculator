@@ -108,7 +108,7 @@ void get_Matrix(char operation) {
 	cout << endl << endl;
 
 	if (operation == '+' || operation == '-') {
-		if (A.rows_matrix != B.rows_matrix && A.cols_matrix != B.cols_matrix) {
+		if (A.rows_matrix != B.rows_matrix || A.cols_matrix != B.cols_matrix) {
 			invalid = true;
 		}
 	}
@@ -243,7 +243,7 @@ void get_Matrix(char operation) {
 
 	}
 	else {
-		cout << endl << "** Error: INVALID ORDER **";
+		cout << endl <<endl<< "** Error: INVALID ORDER **";
 	}
 
 	
