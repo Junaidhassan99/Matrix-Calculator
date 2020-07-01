@@ -5,6 +5,8 @@
 
 using namespace std;
 
+
+//Matrix structure which defines rows, columns and symbol of a matrix
 struct Matrix
 {
 	int rows_matrix, cols_matrix;
@@ -12,17 +14,21 @@ struct Matrix
 
 };
 
+//maximum size of a matrix
 const int general_order_of_matrices = 20;
 
-void display_order(int r, int c,char s) {
+
+//display order of a given matrix
+void display_order(Matrix m) {
 
 	cout << endl;
 	
-	cout << " Order of matrix "<<s<<" = " << r << " * " << c;
+	cout << " Order of matrix "<<m.matrix_symbol<<" = " << m.rows_matrix << " * " << m.cols_matrix;
 
 
 }
 
+//gets an operation to perform fro the user and return the symbol of that operation
 char operation() {
 
 	char operation_symobol;
@@ -48,16 +54,19 @@ char operation() {
 
 }
 
+//displays Press any key to continue...
 void press_to_continue() {
 	cout << endl;
 	cout << " Press any key to continue...";
 	_getch();
 }
 
+//clear screen
 void cls() {
 	system("CLS");
 }
 
+//get order of 2 matrices i.e. A and B from the user and returns that using reference operators
 void get_order_of_matrix(Matrix &matrix_A,Matrix &matrix_B) {
 
 	cout << " Order of Matrix:" << endl << endl;
@@ -86,27 +95,35 @@ void get_order_of_matrix(Matrix &matrix_A,Matrix &matrix_B) {
 	cls();
 }
 
+
+//Two matix calculator which gets two matrices from the user, 
+//perform the given operation +,- or * on them and display the results
 void get_Matrix(char operation) {
 
+	//defined insatance of matrix A and B
 	Matrix A;
 	Matrix B;
+	//invalid is false when the given order is correct according to given operation
+	//otherwise it is true
 	bool invalid = false;
 
-
+	//get order of both matrices from the user
 	get_order_of_matrix(A, B);
 
+	//display the order obtained
 	cout << " Order of Matrix:" << endl << endl;
 
-	display_order(A.rows_matrix, A.cols_matrix, A.matrix_symbol);
-	display_order(B.rows_matrix, B.cols_matrix, B.matrix_symbol);
+	display_order(A);
+	display_order(B);
 
-
+	//arrays of matix A and B for storing their elements in 2-D array
 	float arr_A[general_order_of_matrices][general_order_of_matrices] = { 0 };
 	float arr_B[general_order_of_matrices][general_order_of_matrices] = { 0 };
 
 
 	cout << endl << endl;
 
+	//checking validity of matrix using its order
 	if (operation == '+' || operation == '-') {
 		if (A.rows_matrix != B.rows_matrix || A.cols_matrix != B.cols_matrix) {
 			invalid = true;
@@ -118,9 +135,11 @@ void get_Matrix(char operation) {
 		}
 	}
 
+	//runs for a valid order
 	if (!invalid) {
 		cout << " Elements of Matrix " << A.matrix_symbol << ": " << endl << endl;
 
+		//get all elements of matrix A
 		for (int i = 0; i < A.rows_matrix; i++) {
 			for (int j = 0; j < A.cols_matrix; j++) {
 				cout <<" "<< A.matrix_symbol << " [ Row = " << i + 1 << " ][ Col = " << j + 1 << " ] = ";
@@ -128,6 +147,7 @@ void get_Matrix(char operation) {
 			}
 		}
 
+		//display all elements of matrix A
 		cout << endl;
 		cout <<" "<< A.matrix_symbol << " = ";
 		for (int i = 0; i < A.rows_matrix; i++) {
@@ -145,6 +165,7 @@ void get_Matrix(char operation) {
 
 		cout << " Elements of Matrix " << B.matrix_symbol << ": " << endl << endl;
 
+		//get all elements of matrix B
 		for (int i = 0; i < B.rows_matrix; i++) {
 			for (int j = 0; j < B.cols_matrix; j++) {
 				cout <<" "<< B.matrix_symbol << " [ Row = " << i + 1 << " ][ Col = " << j + 1 << " ] = ";
@@ -152,6 +173,7 @@ void get_Matrix(char operation) {
 			}
 		}
 
+		//display all elements of matrix B
 		cout << endl;
 		cout <<" "<< B.matrix_symbol << " = ";
 		for (int i = 0; i < B.rows_matrix; i++) {
@@ -166,6 +188,8 @@ void get_Matrix(char operation) {
 		}
 	}
 
+	//do addition of A and B matrix and display the result 
+	//also checks validation of matrices according to given order
 	if (operation == '+'&&A.rows_matrix==B.rows_matrix&&A.cols_matrix==B.cols_matrix) {
 		cout << endl << endl;
 		float arr_sum[general_order_of_matrices][general_order_of_matrices] = { 0 };
@@ -188,6 +212,8 @@ void get_Matrix(char operation) {
 
 		}
 	}
+	//do subtraction of A and B matrix and display the result 
+	//also checks validation of matrices according to given order
 	else if (operation == '-' && A.rows_matrix == B.rows_matrix && A.cols_matrix == B.cols_matrix) {
 		cout << endl << endl;
 		float arr_sub[general_order_of_matrices][general_order_of_matrices] = { 0 };
@@ -210,6 +236,8 @@ void get_Matrix(char operation) {
 
 		}
 	}
+	//do product of A and B matrix and display the result 
+	//also checks validation of matrices according to given order
 	else if (operation == '*'&&A.cols_matrix==B.rows_matrix) {
 		cout << endl << endl;
 		float arr_pro[general_order_of_matrices][general_order_of_matrices] ;
@@ -242,8 +270,9 @@ void get_Matrix(char operation) {
 		
 
 	}
+	//Runs for an invalid order or invalid operation
 	else {
-		cout << endl <<endl<< "** Error: INVALID ORDER **";
+		cout << endl  <<"** Error: INVALID ORDER **";
 	}
 
 	
@@ -253,7 +282,7 @@ void get_Matrix(char operation) {
 
 
 
-
+//Methods that activate sum,difference and pro of matrices
 void sum() {
 	get_Matrix('+');
 }
@@ -275,17 +304,18 @@ void main() {
 
 
 		
-
+		//get operation from the user
 		operation_symbol_main = operation();
 
 		
-
+		//check validity of given operation
 		if (operation_symbol_main == '\0') {
 			cout  << endl << " ERROR: *** INVALID SELECTION ***"<<endl;
 		}
 		
 		cout << endl;
 
+		//display the selected operation and do the work
 		cout << " You Selected:";
 		switch (operation_symbol_main)
 		{
@@ -322,8 +352,10 @@ void main() {
 		}
 
 		
-		press_to_continue();
+		cout << endl;
+			press_to_continue();
 
+			//check validation of operation to run the loop again or not 
 		if (operation_symbol_main == '\0') {
 			cls();
 		}
