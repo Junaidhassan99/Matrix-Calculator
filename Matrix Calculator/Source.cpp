@@ -313,71 +313,99 @@ void pro() {
 
 void main() {
 
-	char operation_symbol_main='\0';
+	char start_over;
+	
 
-	
-	
 	do {
-		
+		cls();
+
+		char operation_symbol_main = '\0';
 
 
-		
-		//get operation from the user
-		operation_symbol_main = operation();
 
-		
-		//check validity of given operation
-		if (operation_symbol_main == '\0') {
-			cout  << endl << " ERROR: *** INVALID SELECTION ***"<<endl;
-		}
-		
-		cout << endl;
+		do {
 
-		//display the selected operation and do the work
-		cout << " You Selected:";
-		switch (operation_symbol_main)
-		{
-		case '+':
-		{
-			 cout<<" SUM of MATRICES "<< endl;
-			 press_to_continue();
-			 cls();
-			 sum();
-			 break;
-		}
-		case '-':
-		{
-			cout << " DIFFERENCE of MATRICES " << endl;
-			press_to_continue();
-			cls();
-			diff();
-			break;
-		}
-		case '*':
-		{
-			cout << " PRODUCT of MATRICES " << endl;
-			press_to_continue();
-			cls();
-			pro();
-			break;
-		}
-		default:
-		{
-			cout << " INVALID OPERATOR " << endl;
-			break;
-		}
-			
-		}
 
-		
-		cout << endl;
+
+
+			//get operation from the user
+			operation_symbol_main = operation();
+
+
+			//check validity of given operation
+			if (operation_symbol_main == '\0') {
+				cout << endl << " ERROR: *** INVALID SELECTION ***" << endl;
+			}
+
+			cout << endl;
+
+			//display the selected operation and do the work
+			cout << " You Selected:";
+			switch (operation_symbol_main)
+			{
+			case '+':
+			{
+				cout << " SUM of MATRICES " << endl;
+				press_to_continue();
+				cls();
+				sum();
+				break;
+			}
+			case '-':
+			{
+				cout << " DIFFERENCE of MATRICES " << endl;
+				press_to_continue();
+				cls();
+				diff();
+				break;
+			}
+			case '*':
+			{
+				cout << " PRODUCT of MATRICES " << endl;
+				press_to_continue();
+				cls();
+				pro();
+				break;
+			}
+			default:
+			{
+				cout << " INVALID OPERATOR " << endl;
+				break;
+			}
+
+			}
+
+
+			cout << endl;
 			press_to_continue();
 
 			//check validation of operation to run the loop again or not 
-		if (operation_symbol_main == '\0') {
+			if (operation_symbol_main == '\0') {
+				cls();
+			}
+		} while (operation_symbol_main == '\0');
+
+		bool loop = false;
+		do {
+			
 			cls();
-		}
-	} while (operation_symbol_main == '\0');
+			loop = false;
+			cout << endl << " Start Over ? [y/n] = ";
+			cin >> start_over;
+
+			
+
+			if (start_over != 'y' && start_over != 'Y' && start_over != 'n' && start_over != 'N') {
+				loop = true;
+				cout << endl << endl << " ** INVALID ENTRY **";
+				cout << endl;
+				press_to_continue();
+
+			}
+		} while (loop);
+
+		
+	} while (start_over=='y' || start_over=='Y');
 
 }
 
