@@ -107,33 +107,51 @@ void get_Matrix(char operation) {
 	//otherwise it is true
 	bool invalid = false;
 
-	//get order of both matrices from the user
-	get_order_of_matrix(A, B);
-
-	//display the order obtained
-	cout << " Order of Matrix:" << endl << endl;
-
-	display_order(A);
-	display_order(B);
-
 	//arrays of matix A and B for storing their elements in 2-D array
 	float arr_A[general_order_of_matrices][general_order_of_matrices] = { 0 };
 	float arr_B[general_order_of_matrices][general_order_of_matrices] = { 0 };
 
 
-	cout << endl << endl;
+	do {
+		cls();
+		invalid = false;
 
-	//checking validity of matrix using its order
-	if (operation == '+' || operation == '-') {
-		if (A.rows_matrix != B.rows_matrix || A.cols_matrix != B.cols_matrix) {
-			invalid = true;
+		//get order of both matrices from the user
+		get_order_of_matrix(A, B);
+
+		//display the order obtained
+		cout << " Order of Matrix:" << endl << endl;
+
+		display_order(A);
+		display_order(B);
+
+		
+
+
+		cout << endl << endl;
+
+		//checking validity of matrix using its order
+		if (operation == '+' || operation == '-') {
+			if (A.rows_matrix != B.rows_matrix || A.cols_matrix != B.cols_matrix) {
+				invalid = true;
+			}
 		}
-	}
-	else if (operation == '*') {
-		if (A.cols_matrix != B.rows_matrix) {
-			invalid = true;
+		else if (operation == '*') {
+			if (A.cols_matrix != B.rows_matrix) {
+				invalid = true;
+			}
 		}
-	}
+
+		//Runs for an invalid order or invalid operation
+		if (invalid) {
+			
+			cout << endl << " ** Error: INVALID ORDER **"<<endl;
+			press_to_continue();
+			
+		}
+
+	} while (invalid);
+	
 
 	//runs for a valid order
 	if (!invalid) {
