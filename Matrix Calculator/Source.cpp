@@ -18,7 +18,7 @@ void display_order(int r, int c,char s) {
 
 	cout << endl;
 	
-	cout << "Order of matrix "<<s<<" = " << r << " * " << c;
+	cout << " Order of matrix "<<s<<" = " << r << " * " << c;
 
 
 }
@@ -27,12 +27,12 @@ char operation() {
 
 	char operation_symobol;
 
-	cout << "Select an operation to continue:" << endl;
-	cout << "+ = SUM"<<endl;
-	cout << "- = SUBTRACTION" << endl;
-	cout << "* = PRODUCT" << endl;
+	cout << " Select an option to continue:" << endl<<endl;
+	cout << " + = SUM"<<endl;
+	cout << " - = SUBTRACTION" << endl;
+	cout << " * = PRODUCT" << endl;
 	cout << endl;
-	cout << "Operation = ";
+	cout << " Operation = ";
 
 	cin >> operation_symobol;
 
@@ -50,7 +50,7 @@ char operation() {
 
 void press_to_continue() {
 	cout << endl;
-	cout << "Press any key to continue...";
+	cout << " Press any key to continue...";
 	_getch();
 }
 
@@ -60,26 +60,26 @@ void cls() {
 
 void get_order_of_matrix(Matrix &matrix_A,Matrix &matrix_B) {
 
-	cout << "Order of Matrix:" << endl << endl;
+	cout << " Order of Matrix:" << endl << endl;
 
 	matrix_A.matrix_symbol = 'A';
-	cout << "Matrix A:"<<endl;
-	cout << "Rows = ";
+	cout << " Matrix A:"<<endl;
+	cout << " Rows = ";
 	cin >> matrix_A.rows_matrix;
-	cout << "Columns = ";
+	cout << " Columns = ";
 	cin >> matrix_A.cols_matrix;
 
 	cout << endl;
 
 
 	matrix_B.matrix_symbol = 'B';
-	cout << "Matrix B:" << endl;
-	cout << "Rows = ";
+	cout << " Matrix B:" << endl;
+	cout << " Rows = ";
 	cin >> matrix_B.rows_matrix;
-	cout << "Columns = ";
+	cout << " Columns = ";
 	cin >> matrix_B.cols_matrix;
 
-	cout << endl;
+	
 
 
 	press_to_continue();
@@ -95,7 +95,7 @@ void get_Matrix(char operation) {
 
 	get_order_of_matrix(A, B);
 
-	cout << "Order of Matrix:" << endl << endl;
+	cout << " Order of Matrix:" << endl << endl;
 
 	display_order(A.rows_matrix, A.cols_matrix, A.matrix_symbol);
 	display_order(B.rows_matrix, B.cols_matrix, B.matrix_symbol);
@@ -119,17 +119,17 @@ void get_Matrix(char operation) {
 	}
 
 	if (!invalid) {
-		cout << "Elements of Matrix " << A.matrix_symbol << ": " << endl << endl;
+		cout << " Elements of Matrix " << A.matrix_symbol << ": " << endl << endl;
 
 		for (int i = 0; i < A.rows_matrix; i++) {
 			for (int j = 0; j < A.cols_matrix; j++) {
-				cout << A.matrix_symbol << " [ Row = " << i + 1 << " ][ Col = " << j + 1 << " ] = ";
+				cout <<" "<< A.matrix_symbol << " [ Row = " << i + 1 << " ][ Col = " << j + 1 << " ] = ";
 				cin >> arr_A[i][j];
 			}
 		}
 
 		cout << endl;
-		cout << A.matrix_symbol << " = ";
+		cout <<" "<< A.matrix_symbol << " = ";
 		for (int i = 0; i < A.rows_matrix; i++) {
 			cout << "| " << "\t";
 			for (int j = 0; j < A.cols_matrix; j++) {
@@ -137,31 +137,32 @@ void get_Matrix(char operation) {
 			}
 
 			cout << " |" << endl;
-			cout << setw(6);
+			cout << setw(7);
 		}
 
 		cout << endl << endl;
 
 
-		cout << "Elements of Matrix " << B.matrix_symbol << ": " << endl << endl;
+		cout << " Elements of Matrix " << B.matrix_symbol << ": " << endl << endl;
 
 		for (int i = 0; i < B.rows_matrix; i++) {
 			for (int j = 0; j < B.cols_matrix; j++) {
-				cout << B.matrix_symbol << " [ Row = " << i + 1 << " ][ Col = " << j + 1 << " ] = ";
+				cout <<" "<< B.matrix_symbol << " [ Row = " << i + 1 << " ][ Col = " << j + 1 << " ] = ";
 				cin >> arr_B[i][j];
 			}
 		}
 
 		cout << endl;
-		cout << B.matrix_symbol << " = ";
+		cout <<" "<< B.matrix_symbol << " = ";
 		for (int i = 0; i < B.rows_matrix; i++) {
 			cout << "| " << "\t";
 			for (int j = 0; j < B.cols_matrix; j++) {
 				cout << arr_B[i][j] << "\t";
+
 			}
 
 			cout << " |" << endl;
-			cout << setw(6);
+			cout << setw(7);
 		}
 	}
 
@@ -175,10 +176,10 @@ void get_Matrix(char operation) {
 			}
 		}
 
-		cout << "A+B = " << endl << endl;
+		cout << " A+B = " << endl << endl;
 
 		for (int i = 0; i < A.rows_matrix; i++) {
-			cout << "| " << "\t";
+			cout << " | " << "\t";
 			for (int j = 0; j < A.cols_matrix; j++) {
 				cout << arr_sum[i][j] << "\t";
 			}
@@ -197,10 +198,10 @@ void get_Matrix(char operation) {
 			}
 		}
 
-		cout << "A-B = " << endl<<endl;
+		cout << " A-B = " << endl<<endl;
 
 		for (int i = 0; i < A.rows_matrix; i++) {
-			cout << "| " << "\t";
+			cout << " | " << "\t";
 			for (int j = 0; j < A.cols_matrix; j++) {
 				cout << arr_sub[i][j] << "\t";
 			}
@@ -211,26 +212,35 @@ void get_Matrix(char operation) {
 	}
 	else if (operation == '*'&&A.cols_matrix==B.rows_matrix) {
 		cout << endl << endl;
-		float arr_pro[general_order_of_matrices][general_order_of_matrices] = { 0 };
+		float arr_pro[general_order_of_matrices][general_order_of_matrices] ;
 
 		for (int r = 0; r < A.rows_matrix; r++) {
 			for (int c = 0; c < B.cols_matrix; c++) {
-				arr_pro[r][c] = arr_A[r][0] * arr_B[0][c] + arr_A[r][1] * arr_B[1][c];
+				arr_pro[r][c]=0;
 			}
 		}
 
-
-		cout << "A*B = "<<endl << endl;
-
-		for (int i = 0; i < A.rows_matrix; i++) {
-			cout << "| " << "\t";
-			for (int j = 0; j < A.cols_matrix; j++) {
-				cout << arr_pro[i][j] << "\t";
+		for (int r = 0; r < A.rows_matrix; r++) {
+			for (int c = 0; c < B.cols_matrix; c++) {
+				for (int k = 0; k < A.cols_matrix; k++) {
+					arr_pro[r][c] += arr_A[r][k] * arr_B[k][c];
+				}
 			}
+		}
 
+		cout << " A*B = " << endl << endl;
+
+		for (int r = 0; r < A.rows_matrix; r++) {
+			cout << " | " << "\t";
+			for (int c = 0; c < B.cols_matrix; c++)
+			{
+				cout << arr_pro[r][c] << "\t";
+			}
 			cout << " |" << endl;
-
 		}
+
+		
+
 	}
 	else {
 		cout << endl << "** Error: INVALID ORDER **";
@@ -271,17 +281,17 @@ void main() {
 		
 
 		if (operation_symbol_main == '\0') {
-			cout  << endl << "ERROR: ***INVALID SELECTION***"<<endl;
+			cout  << endl << " ERROR: *** INVALID SELECTION ***"<<endl;
 		}
 		
 		cout << endl;
 
-		cout << "You Selected:";
+		cout << " You Selected:";
 		switch (operation_symbol_main)
 		{
 		case '+':
 		{
-			 cout<<" SUM of MATRICES " <<endl<<endl;
+			 cout<<" SUM of MATRICES "<< endl;
 			 press_to_continue();
 			 cls();
 			 sum();
@@ -289,7 +299,7 @@ void main() {
 		}
 		case '-':
 		{
-			cout << " DIFFERENCE of MATRICES ";
+			cout << " DIFFERENCE of MATRICES " << endl;
 			press_to_continue();
 			cls();
 			diff();
@@ -297,7 +307,7 @@ void main() {
 		}
 		case '*':
 		{
-			cout << " PRODUCT of MATRICES ";
+			cout << " PRODUCT of MATRICES " << endl;
 			press_to_continue();
 			cls();
 			pro();
@@ -305,13 +315,13 @@ void main() {
 		}
 		default:
 		{
-			cout << " INVALID OPERATOR ";
+			cout << " INVALID OPERATOR " << endl;
 			break;
 		}
 			
 		}
 
-		cout << endl;
+		
 		press_to_continue();
 
 		if (operation_symbol_main == '\0') {
