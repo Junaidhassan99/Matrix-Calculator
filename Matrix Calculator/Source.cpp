@@ -71,7 +71,16 @@ void cls() {
 }
 
 //get order of 2 matrices i.e. A and B from the user and returns that using reference operators
-void get_order_of_matrix(Matrix &matrix_A,Matrix &matrix_B) {
+void get_order_of_matrix(Matrix &matrix_A,Matrix &matrix_B,char op) {
+
+	if (op == '+' || op == '-') {
+		cout << " NOTE: Number of Rows and Columns of First matrix must be equal to Number of Rows and Columns of Second matrix"<<endl<<endl;
+	}
+	else if (op == '*') {
+		cout << " NOTE: Number of Columns of First matrix must be equal to Number of Rows of Second matrix" << endl << endl;
+
+	}
+	else{}
 
 	cout << " Order of Matrix:" << endl << endl;
 
@@ -201,7 +210,7 @@ void get_Matrix(char operation) {
 		invalid = false;
 
 		//get order of both matrices from the user
-		get_order_of_matrix(A, B);
+		get_order_of_matrix(A, B,operation);
 
 		//display the order obtained
 		cout << " Order of Matrix:" << endl << endl;
@@ -348,6 +357,7 @@ void solve_linear_eqs() {
 
 		bool validation;
 		do {
+			cout << " NOTE: Number must be greater then Zero" << endl << endl;
 			validation = true;
 			cout << "\n Number of equations = ";
 			cin >> n;
@@ -468,8 +478,12 @@ void power_of_matrix() {
 		cls();
 		invalid = false;
 
+		cout << " NOTE: Number of Rows must be equal to Number of Columns" << endl << endl;
+
 		//get order of matrix from the user
 		get_order_of_single_matrix(P);
+
+
 
 		//display the order obtained
 		cout << " Order of Matrix:" << endl << endl;
