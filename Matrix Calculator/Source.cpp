@@ -102,25 +102,26 @@ void display_result(float result[general_order_of_matrices][general_order_of_mat
 
 	//cout << endl;
 
+	
 
-
-	cout << " A"<<op<<"B = ";
+	cout << "\tA"<<op<<"B = ";
+	
 
 	
 
 		for (int i = 0; i < m.rows_matrix; i++) {
 			if (i == 0) {
-				cout << "  " << "\t";
+				cout << "  ";
 			}
 			else {
-				cout << " " << "\t";
+				cout << " " ;
 			}
 			for (int j = 0; j < n.cols_matrix; j++) {
 				cout << result[i][j] << "\t";
 			}
 
 			cout << " " << endl;
-			cout << "\t";
+			cout << "\t\t";
 
 		}
 	
@@ -131,9 +132,9 @@ void display_matrix(Matrix m,float arr[general_order_of_matrices][general_order_
 
 	//display all elements of matrix B
 	cout << endl;
-	cout << " " << m.matrix_symbol << " = ";
+	cout << "\t" << m.matrix_symbol << " = ";
 	for (int i = 0; i < m.rows_matrix; i++) {
-		cout << "| " << "\t";
+		cout << " \t" ;
 		for (int j = 0; j < m.cols_matrix; j++) {
 			cout << arr[i][j];
 
@@ -144,8 +145,8 @@ void display_matrix(Matrix m,float arr[general_order_of_matrices][general_order_
 
 		}
 
-		cout << "  |" << endl;
-		cout << setw(7);
+		cout << "  " << endl;
+		cout << setw(7)<<"\t";
 	}
 }
 
