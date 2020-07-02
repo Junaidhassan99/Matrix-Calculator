@@ -96,6 +96,59 @@ void get_order_of_matrix(Matrix &matrix_A,Matrix &matrix_B) {
 }
 
 
+//prints the output matrix of sum,pro and diff.
+//Note: for sum and diff put m=n
+void display_result(float result[general_order_of_matrices][general_order_of_matrices],Matrix m,Matrix n,char op) {
+
+	//cout << endl;
+
+
+
+	cout << " A"<<op<<"B = ";
+
+	
+
+		for (int i = 0; i < m.rows_matrix; i++) {
+			if (i == 0) {
+				cout << "  " << "\t";
+			}
+			else {
+				cout << " " << "\t";
+			}
+			for (int j = 0; j < n.cols_matrix; j++) {
+				cout << result[i][j] << "\t";
+			}
+
+			cout << " " << endl;
+			cout << "\t";
+
+		}
+	
+	
+}
+
+void display_matrix(Matrix m,float arr[general_order_of_matrices][general_order_of_matrices]) {
+
+	//display all elements of matrix B
+	cout << endl;
+	cout << " " << m.matrix_symbol << " = ";
+	for (int i = 0; i < m.rows_matrix; i++) {
+		cout << "| " << "\t";
+		for (int j = 0; j < m.cols_matrix; j++) {
+			cout << arr[i][j];
+
+			//to make a proper form of matrix
+			if (j != m.cols_matrix - 1) {
+				cout << "\t";
+			}
+
+		}
+
+		cout << "  |" << endl;
+		cout << setw(7);
+	}
+}
+
 //Two matix calculator which gets two matrices from the user, 
 //perform the given operation +,- or * on them and display the results
 void get_Matrix(char operation) {
@@ -166,17 +219,7 @@ void get_Matrix(char operation) {
 		}
 
 		//display all elements of matrix A
-		cout << endl;
-		cout <<" "<< A.matrix_symbol << " = ";
-		for (int i = 0; i < A.rows_matrix; i++) {
-			cout << "| " << "\t";
-			for (int j = 0; j < A.cols_matrix; j++) {
-				cout << arr_A[i][j] << "\t";
-			}
-
-			cout << " |" << endl;
-			cout << setw(7);
-		}
+		display_matrix(A, arr_A);
 
 		cout << endl << endl;
 
@@ -188,22 +231,14 @@ void get_Matrix(char operation) {
 			for (int j = 0; j < B.cols_matrix; j++) {
 				cout <<" "<< B.matrix_symbol << " [ Row = " << i + 1 << " ][ Col = " << j + 1 << " ] = ";
 				cin >> arr_B[i][j];
+
 			}
 		}
 
-		//display all elements of matrix B
-		cout << endl;
-		cout <<" "<< B.matrix_symbol << " = ";
-		for (int i = 0; i < B.rows_matrix; i++) {
-			cout << "| " << "\t";
-			for (int j = 0; j < B.cols_matrix; j++) {
-				cout << arr_B[i][j] << "\t";
+		//display all elements of matrix A
+		display_matrix(B, arr_B);
 
-			}
-
-			cout << " |" << endl;
-			cout << setw(7);
-		}
+		
 	}
 
 	//do addition of A and B matrix and display the result 
@@ -218,17 +253,9 @@ void get_Matrix(char operation) {
 			}
 		}
 
-		cout << " A+B = " << endl << endl;
+		display_result(arr_sum, A, A, operation);
 
-		for (int i = 0; i < A.rows_matrix; i++) {
-			cout << " | " << "\t";
-			for (int j = 0; j < A.cols_matrix; j++) {
-				cout << arr_sum[i][j] << "\t";
-			}
-			
-			cout << " |" << endl ;
-
-		}
+		
 	}
 	//do subtraction of A and B matrix and display the result 
 	//also checks validation of matrices according to given order
@@ -242,17 +269,7 @@ void get_Matrix(char operation) {
 			}
 		}
 
-		cout << " A-B = " << endl<<endl;
-
-		for (int i = 0; i < A.rows_matrix; i++) {
-			cout << " | " << "\t";
-			for (int j = 0; j < A.cols_matrix; j++) {
-				cout << arr_sub[i][j] << "\t";
-			}
-			
-			cout << " |" << endl ;
-
-		}
+		display_result(arr_sub, A, A, operation);
 	}
 	//do product of A and B matrix and display the result 
 	//also checks validation of matrices according to given order
@@ -274,16 +291,7 @@ void get_Matrix(char operation) {
 			}
 		}
 
-		cout << " A*B = " << endl << endl;
-
-		for (int r = 0; r < A.rows_matrix; r++) {
-			cout << " | " << "\t";
-			for (int c = 0; c < B.cols_matrix; c++)
-			{
-				cout << arr_pro[r][c] << "\t";
-			}
-			cout << " |" << endl;
-		}
+		display_result(arr_pro, A, B, operation);
 
 		
 
