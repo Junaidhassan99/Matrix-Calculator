@@ -38,13 +38,15 @@ char operation() {
 	cout << " - = SUBTRACTION" << endl;
 	cout << " * = PRODUCT" << endl;
 	cout << " L = Solve Linear Equations" << endl;
+	cout << " P = POWER of MARIX" << endl;
 	cout << endl;
 	cout << " Operation = ";
 
 	cin >> operation_symobol;
 
 	if (operation_symobol == '+' || operation_symobol == '*' || operation_symobol == '-'
-		|| operation_symobol =='l'||operation_symobol=='L') {
+		|| operation_symobol =='l'||operation_symobol=='L' 
+		|| operation_symobol == 'p' || operation_symobol == 'P') {
 		return operation_symobol;
 	}
 	else {
@@ -97,16 +99,42 @@ void get_order_of_matrix(Matrix &matrix_A,Matrix &matrix_B) {
 	cls();
 }
 
+//get order of single matrix i.e. P from the user and returns that using reference operators
+void get_order_of_single_matrix(Matrix& matrix_P) {
+
+	cout << " Order of Matrix:" << endl << endl;
+
+	matrix_P.matrix_symbol = 'P';
+	cout << " Matrix P:" << endl;
+	cout << " Rows = ";
+	cin >> matrix_P.rows_matrix;
+	cout << " Columns = ";
+	cin >> matrix_P.cols_matrix;
+
+	cout << endl;
+
+
+
+
+
+	press_to_continue();
+	cls();
+}
+
 
 //prints the output matrix of sum,pro and diff.
 //Note: for sum and diff put m=n
-void display_result(float result[general_order_of_matrices][general_order_of_matrices],Matrix m,Matrix n,char op) {
+void display_result(float result[general_order_of_matrices][general_order_of_matrices],Matrix m,Matrix n,char op,int powerx) {
 
 	//cout << endl;
 
 	
-
-	cout << "\tA"<<op<<"B = ";
+	if (op != '^') {
+		cout << "\tA" << op << "B = ";
+	}
+	else {
+		cout << "\tA" << op << powerx<<" =  ";
+	}
 	
 
 	
@@ -256,7 +284,7 @@ void get_Matrix(char operation) {
 			}
 		}
 
-		display_result(arr_sum, A, A, operation);
+		display_result(arr_sum, A, A, operation,0);
 
 		
 	}
@@ -272,7 +300,7 @@ void get_Matrix(char operation) {
 			}
 		}
 
-		display_result(arr_sub, A, A, operation);
+		display_result(arr_sub, A, A, operation,0);
 	}
 	//do product of A and B matrix and display the result 
 	//also checks validation of matrices according to given order
@@ -294,7 +322,7 @@ void get_Matrix(char operation) {
 			}
 		}
 
-		display_result(arr_pro, A, B, operation);
+		display_result(arr_pro, A, B, operation,0);
 
 		
 
@@ -418,6 +446,125 @@ void solve_linear_eqs() {
 	
 }
 
+void power_of_matrix() {
+
+	int power;
+
+	//defined insatance of matrix P
+	Matrix P;
+	
+	//invalid is false when the given order is correct according to given operation
+	//otherwise it is true
+	bool invalid = false;
+
+	//arrays of matix P for storing its elements in 2-D array
+	float arr_P[general_order_of_matrices][general_order_of_matrices] = { 0 };
+	//power of matrix P's elements will be stored here
+	float arr_pow[general_order_of_matrices][general_order_of_matrices] = { 0 };
+	
+
+
+	do {
+		cls();
+		invalid = false;
+
+		//get order of matrix from the user
+		get_order_of_single_matrix(P);
+
+		//display the order obtained
+		cout << " Order of Matrix:" << endl << endl;
+
+		display_order(P);
+		
+
+
+
+
+		cout << endl << endl;
+
+		//checking validity of matrix using its order
+		if (P.cols_matrix != P.rows_matrix) {
+			invalid = true;
+		}
+
+		//Runs for an invalid order or invalid operation
+		if (invalid) {
+
+			cout << endl << " ** Error: INVALID ORDER **" << endl;
+			press_to_continue();
+
+		}
+
+	} while (invalid);
+
+
+	//runs for a valid order
+	if (!invalid) {
+		cout << " Elements of Matrix " << P.matrix_symbol << ": " << endl << endl;
+
+		//get all elements of matrix A
+		for (int i = 0; i < P.rows_matrix; i++) {
+			for (int j = 0; j < P.cols_matrix; j++) {
+				cout << " " << P.matrix_symbol << " [ Row = " << i + 1 << " ][ Col = " << j + 1 << " ] = ";
+				cin >> arr_P[i][j];
+
+				if (i == j)
+					arr_pow[i][j] = 1;
+				else
+					arr_pow[i][j] = 0;
+
+				
+			}
+		}
+
+		
+
+		//display all elements of matrix A
+		display_matrix(P, arr_P);
+
+
+		//find power
+
+		cout <<endl<< "Power = ";
+		cin >> power;
+
+		
+
+		cout << endl << endl;
+		
+
+	
+		//process the value of power of matrix
+		for (int s = 0; s < power; s++) {
+			float b[general_order_of_matrices][general_order_of_matrices];
+			for (int i = 0; i < P.rows_matrix; i++)
+			{
+				for (int j = 0; j < P.rows_matrix; j++)
+				{
+					b[i][j] = 0;
+					for (int k = 0; k < P.rows_matrix; k++)
+						b[i][j] = b[i][j] + arr_P[i][k] * arr_pow[k][j];
+				}
+			}
+			for (int i = 0; i < P.rows_matrix; i++)
+			{
+				for (int j = 0; j < P.rows_matrix; j++)
+					arr_pow[i][j] = b[i][j];
+			}
+		}
+
+		
+
+		//display result
+		display_result(arr_pow, P, P, '^',power);
+
+
+		
+
+
+	}
+}
+
 
 
 //Methods that activate sum,difference and pro of matrices
@@ -494,6 +641,15 @@ void main() {
 				press_to_continue();
 				cls();
 				solve_linear_eqs();
+				break;
+			}
+			case 'p':
+			case 'P':
+			{
+				cout << " POWER of MATRIX" << endl;
+				press_to_continue();
+				cls();
+				power_of_matrix();
 				break;
 			}
 			default:
