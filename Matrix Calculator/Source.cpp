@@ -37,12 +37,14 @@ char operation() {
 	cout << " + = SUM"<<endl;
 	cout << " - = SUBTRACTION" << endl;
 	cout << " * = PRODUCT" << endl;
+	cout << " L = Solve Linear Equations" << endl;
 	cout << endl;
 	cout << " Operation = ";
 
 	cin >> operation_symobol;
 
-	if (operation_symobol == '+' || operation_symobol == '*' || operation_symobol == '-') {
+	if (operation_symobol == '+' || operation_symobol == '*' || operation_symobol == '-'
+		|| operation_symobol =='l'||operation_symobol=='L') {
 		return operation_symobol;
 	}
 	else {
@@ -307,6 +309,115 @@ void get_Matrix(char operation) {
 
 }
 
+void solve_linear_eqs() {
+	
+		int a, b, c, n;
+
+		Matrix L;
+		
+		
+
+
+		bool validation;
+		do {
+			validation = true;
+			cout << "\n Number of equations = ";
+			cin >> n;
+
+			if (n < 1) {
+				cout << endl << " ** NEGATIVE NUMBERS OR ZERO NOT ALLOWED **"<<endl;
+				validation = false;
+				
+				press_to_continue();
+				cls();
+			}
+		} while (!validation);
+
+		L.matrix_symbol = 'L';
+		L.cols_matrix = n+1;
+		L.rows_matrix = n;
+
+
+		float matrix[general_order_of_matrices-1][general_order_of_matrices ];
+		float display_augmented[general_order_of_matrices - 1][general_order_of_matrices];
+		float resolve[general_order_of_matrices];
+
+		//get the matrix
+		cout << "\n Enter the elements of the augmented matrix: ";
+		cout << endl << endl;
+		for (a = 0; a < n; a++)
+		{
+			for (b = 0; b < n + 1; b++)
+			{
+				cout << " Element [ Row = " << a + 1 << " ][ Col = " << b + 1 << " ] = ";
+				cin >> matrix[a][b];
+				display_augmented[a][b] = matrix[a][b];
+			}
+			cout << endl;
+		}
+		
+
+		for (a = 0; a < n; a++)
+		{
+			for (b = a + 1; b < n; b++)
+			{
+				if (abs(matrix[a][a]) < abs(matrix[b][a]))
+				{
+					for (c = 0; c < n + 1; c++)
+					{
+						//swap matrix
+						matrix[a][c] = matrix[a][c] + matrix[b][c];
+						matrix[b][c] = matrix[a][c] - matrix[b][c];
+						matrix[a][c] = matrix[a][c] - matrix[b][c];
+					}
+				}
+			}
+		}
+
+		//Guass elimination
+		for (a = 0; a < n - 1; a++)
+		{
+			for (b = a + 1; b < n; b++)
+			{
+				float f = matrix[b][a] / matrix[a][a];
+				for (c = 0; c < n + 1; c++)
+				{
+					matrix[b][c] = matrix[b][c] - f * matrix[a][c];
+				}
+			}
+		}
+
+		//Backword substitution
+		for (a = n - 1; a >= 0; a--)
+		{
+			resolve[a] = matrix[a][n];
+
+			for (b = a + 1; b < n; b++)
+			{
+				if (a != b)
+				{
+					resolve[a] = resolve[a] - matrix[a][b] * resolve[b];
+				}
+			}
+			resolve[a] = resolve[a] / matrix[a][a];
+		}
+
+		cout <<endl <<" Augmented Matrix: "<<endl<<endl;
+		display_matrix(L, display_augmented);
+
+
+		//show resultant vector
+		cout << endl << endl << " Resultant Vector:" << endl << endl;
+		cout << "\tV = ";
+		for (a = 0; a < n; a++)
+		{
+			cout << "\t" << resolve[a] << endl<<"\t";
+		}
+	
+
+	
+}
+
 
 
 //Methods that activate sum,difference and pro of matrices
@@ -374,6 +485,15 @@ void main() {
 				press_to_continue();
 				cls();
 				pro();
+				break;
+			}
+			case 'l':
+			case 'L':
+			{
+				cout << " Solve LINEAR EQUATIONS using augmented matrix" << endl;
+				press_to_continue();
+				cls();
+				solve_linear_eqs();
 				break;
 			}
 			default:
