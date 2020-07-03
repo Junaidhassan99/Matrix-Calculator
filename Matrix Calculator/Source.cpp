@@ -82,35 +82,38 @@ void get_order_of_matrix(Matrix &matrix_A,Matrix &matrix_B,char op) {
 	}
 	else{}
 
-	cout << " Order of Matrix:" << endl << endl;
+	do {
+		cout << " Order of Matrix:" << endl << endl;
 
-	matrix_A.matrix_symbol = 'A';
-	cout << " Matrix A:"<<endl;
-	cout << " Rows = ";
-	cin >> matrix_A.rows_matrix;
-	cout << " Columns = ";
-	cin >> matrix_A.cols_matrix;
+		matrix_A.matrix_symbol = 'A';
+		cout << " Matrix A:" << endl;
+		cout << " Rows = ";
+		cin >> matrix_A.rows_matrix;
+		cout << " Columns = ";
+		cin >> matrix_A.cols_matrix;
 
-	cout << endl;
-
-
-	matrix_B.matrix_symbol = 'B';
-	cout << " Matrix B:" << endl;
-	cout << " Rows = ";
-	cin >> matrix_B.rows_matrix;
-	cout << " Columns = ";
-	cin >> matrix_B.cols_matrix;
-
-	
+		cout << endl;
 
 
-	press_to_continue();
-	cls();
+		matrix_B.matrix_symbol = 'B';
+		cout << " Matrix B:" << endl;
+		cout << " Rows = ";
+		cin >> matrix_B.rows_matrix;
+		cout << " Columns = ";
+		cin >> matrix_B.cols_matrix;
+		if (matrix_A.rows_matrix <= 0 || matrix_A.cols_matrix <= 0 || matrix_B.rows_matrix <= 0 || matrix_B.cols_matrix <= 0) {
+			cout << endl << " ** NEGATIVE OR ZERO ORDER NOT ALLOWED **"<<endl;
+		}
+		press_to_continue();
+		cls();
+	} while (matrix_A.rows_matrix <= 0 || matrix_A.cols_matrix <= 0 || matrix_B.rows_matrix <= 0 || matrix_B.cols_matrix <= 0);
+
 }
 
 //get order of single matrix i.e. P from the user and returns that using reference operators
 void get_order_of_single_matrix(Matrix& matrix_P) {
 
+	do{
 	cout << " Order of Matrix:" << endl << endl;
 
 	matrix_P.matrix_symbol = 'P';
@@ -122,12 +125,15 @@ void get_order_of_single_matrix(Matrix& matrix_P) {
 
 	cout << endl;
 
-
-
-
+	if (matrix_P.rows_matrix <= 0 || matrix_P.cols_matrix <=0 ) {
+		cout << endl << " ** NEGATIVE OR ZERO ORDER NOT ALLOWED **";
+	}
 
 	press_to_continue();
 	cls();
+
+	} while (matrix_P.rows_matrix <= 0 || matrix_P.cols_matrix <=0);
+
 }
 
 
@@ -538,9 +544,14 @@ void power_of_matrix() {
 
 
 		//find power
+		do {
+			cout << endl << " Power = ";
+			cin >> power;
 
-		cout <<endl<< "Power = ";
-		cin >> power;
+			if (power < 0) {
+				cout << endl << " ** Negative Power NOT ALLOWED"<<endl ;
+			}
+		} while (power < 0);
 
 		
 
